@@ -21,6 +21,10 @@ USERPROFILENAME=$USER;
 
 DIVIS="${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f${blue}/$f${white}==$f";
 
+
+NEWUSER="NOVO USUÁRIO";
+NEWUSERTIME="NOVO USUÁRIO TEMPORÁRIO";
+USERMONITOR="MONITOR";
 DELETEUSER="APAGAR USUÁRIO";
 CHANGELIMIT="ALTEREAR LIMITE DE CONEXÃO SIMULÂNEA";
 CHANGEDATE="ALTERAR DATA DE EXPIRAÇÃO";
