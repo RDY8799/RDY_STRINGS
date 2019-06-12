@@ -60,3 +60,51 @@ MENU_INSTALL="INSTALADOR/COFIGURAR";
 MANAGE_USERS="GERENCIAMENTO DE USUÁRIOS";
 TOOLS="FERRAMENTAS";
 ABOUT="SOBRE";
+
+about="© ${blue}Copyright ${yellow}RDY ${red}SOFTWARE ${yellow}{${red}}$f ${blue}2019$f"
+cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/	//' > /etc/so
+# VERIFICAR O IP DO SERVIDOR
+ip=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
+
+if [[ "$ip" = "" ]]; then
+ip=$(wget -qO- ipv4.icanhazip.com)
+fi
+
+# ESTADO DE RAM
+CPU=$(ps aux  | awk 'BEGIN { sum = 0 }  { sum += sprintf("%f",$3) }; END { printf " " "%.2f" "%%", sum}')
+totalram=$(free | grep Mem | awk '{print $2}')
+usedram=$(free | grep Mem | awk '{print $3}')
+freeram=$(free | grep Mem | awk '{print $4}')
+swapram=$( cat /proc/meminfo | grep SwapTotal | awk '{print $2}')
+
+# TIPO DE SISTEMA
+if [[ -e /etc/debian_version ]]; then
+	OS=debian
+	GROUPNAME=nogroup
+	RCLOCAL='/etc/rc.local'
+elif [[ -e /etc/centos-release || -e /etc/redhat-release ]]; then
+	OS=centos
+	GROUPNAME=nobody
+	RCLOCAL='/etc/rc.d/rc.local'
+else
+	echo "Looks like you aren't running this installer on a Debian, Ubuntu or CentOS system"
+	exit 2
+fi
+
+# PROGRESS BAR
+RDYSPINNER()
+{
+    local pid=$!
+    local delay=0.50
+    local spinstr='|/-\'
+	tput civis -- invisible
+    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
+        local temp=${spinstr#?}
+        printf " ${yellow}[${mag}%c${red}]$f  " "$spinstr"
+        local spinstr=$temp${spinstr%"$temp"}
+        sleep $delay
+        printf "\b\b\b\b\b\b"
+    done
+    printf "    \b\b\b\b"
+	tput cnorm -- normal
+}
