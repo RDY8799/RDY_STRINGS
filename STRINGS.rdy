@@ -97,7 +97,7 @@ RDYCTRLC(){
 printf "\rOOuuu! Me parou!!"
 }
 
-trap RDYCTRLC SIGINT
+#trap RDYCTRLC SIGINT
 
 while true; do
 read crap
