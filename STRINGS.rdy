@@ -70,6 +70,8 @@ if [[ "$ip" = "" ]]; then
 ip=$(wget -qO- ipv4.icanhazip.com)
 fi
 
+IP=$ip
+
 # ESTADO DE RAM
 CPU=$(ps aux  | awk 'BEGIN { sum = 0 }  { sum += sprintf("%f",$3) }; END { printf " " "%.2f" "%%", sum}')
 totalram=$(free | grep Mem | awk '{print $2}')
@@ -90,6 +92,17 @@ else
 	echo "Looks like you aren't running this installer on a Debian, Ubuntu or CentOS system"
 	exit 2
 fi
+
+RDYCTRLC(){
+printf "\rOOuuu! Me parou!!"
+}
+
+trap RDYCTRLC SIGINT
+
+while true; do
+read crap
+printf "RDY SOFTWARE 2019"
+done
 
 # PROGRESS BAR
 RDYSPINNER()
