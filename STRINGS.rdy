@@ -99,10 +99,10 @@ printf "\rOOuuu! Me parou!!"
 
 #trap RDYCTRLC SIGINT
 
-while true; do
-read crap
-printf "RDY SOFTWARE 2019"
-done
+#while true; do
+#read crap
+#printf "RDY SOFTWARE 2019"
+#done
 
 # PROGRESS BAR
 RDYSPINNER()
